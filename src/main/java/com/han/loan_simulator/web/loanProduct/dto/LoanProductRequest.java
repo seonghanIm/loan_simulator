@@ -4,10 +4,14 @@ import com.han.loan_simulator.domain.loanProduct.LoanProduct;
 import com.han.loan_simulator.domain.loanProduct.RepaymentMethod;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Builder
 public class LoanProductRequest {
     private String name;

@@ -1,5 +1,6 @@
 package com.han.loan_simulator.domain.loanProduct;
 
+import com.han.loan_simulator.web.loanProduct.dto.LoanProductResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,6 +51,19 @@ public class LoanProduct {
     public boolean isValidTerm(){
         if(minTermMonth > maxTermMonth) return false;
         return true;
+    }
+
+    public LoanProductResponse toResponse(){
+        return LoanProductResponse.builder()
+                .loanProductId(id)
+                .name(name)
+                .minAmount(minAmount)
+                .maxAmount(maxAmount)
+                .minTermMonth(minTermMonth)
+                .maxTermMonth(maxTermMonth)
+                .interestRate(interestRate)
+                .repaymentMethod(repaymentMethod)
+                .build();
     }
 
 

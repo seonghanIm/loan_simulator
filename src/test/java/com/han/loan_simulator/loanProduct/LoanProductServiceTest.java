@@ -1,13 +1,12 @@
 package com.han.loan_simulator.loanProduct;
 
-import com.han.loan_simulator.common.BaseResponse;
+import com.han.loan_simulator.common.base.BaseResponse;
 import com.han.loan_simulator.common.RESPONSE;
-import com.han.loan_simulator.domain.application.loanProduct.LoanProductService;
+import com.han.loan_simulator.application.loanProduct.LoanProductService;
 import com.han.loan_simulator.domain.loanProduct.LoanProduct;
 import com.han.loan_simulator.domain.loanProduct.LoanProductRepository;
 import com.han.loan_simulator.domain.loanProduct.RepaymentMethod;
 import com.han.loan_simulator.web.loanProduct.dto.LoanProductRequest;
-import com.han.loan_simulator.web.loanProduct.dto.LoanProductResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
