@@ -2,10 +2,7 @@ package com.han.loan_simulator.domain.loanProduct;
 
 import com.han.loan_simulator.web.loanProduct.dto.LoanProductResponse;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @Getter
+@Setter
 public class LoanProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

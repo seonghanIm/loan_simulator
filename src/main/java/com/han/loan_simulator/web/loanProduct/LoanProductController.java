@@ -1,7 +1,7 @@
 package com.han.loan_simulator.web.loanProduct;
 
 import com.han.loan_simulator.application.loanProduct.LoanProductService;
-import com.han.loan_simulator.common.base.BaseResponse;
+import com.han.loan_simulator.common.baseDto.BaseResponse;
 import com.han.loan_simulator.web.loanProduct.dto.LoanProductRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.han.loan_simulator.application.loanProduct;
 
-import com.han.loan_simulator.common.base.BaseResponse;
 import com.han.loan_simulator.common.RESPONSE;
+import com.han.loan_simulator.common.baseDto.BaseResponse;
 import com.han.loan_simulator.domain.loanProduct.LoanProduct;
 import com.han.loan_simulator.domain.loanProduct.LoanProductRepository;
 import com.han.loan_simulator.web.loanProduct.dto.LoanProductRequest;
@@ -9,6 +9,8 @@ import com.han.loan_simulator.web.loanProduct.dto.LoanProductResponse;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class LoanProductService {
             LoanProductResponse response = new LoanProductResponse();
             response.fromEntity(product.get());
 
-            return new BaseResponse<>();
+            return new BaseResponse<LoanProductResponse>().ofSuccess(response);
         }catch (Exception e){
             log.error("LoanProductService :: findById :: error :: {}",e.toString());
             return new BaseResponse<LoanProductResponse>()
@@ -77,30 +79,23 @@ public class LoanProductService {
         }
     }
 
-    /**
-     * todo 페이징 처리
-     */
     @Transactional
-    public BaseResponse<List<LoanProductResponse>> findAll(){
+    public BaseResponse<Page<LoanProductResponse>> findAll(Pageable pageable){
         try {
-            List<LoanProduct> loanProductList = loanProductRepository.findAll();
+            Page<LoanProduct> loanProductList = loanProductRepository.findAll(pageable);
 
             if (loanProductList.isEmpty()) {
-                return new BaseResponse<List<LoanProductResponse>>()
+                return new BaseResponse<Page<LoanProductResponse>>()
                         .ofError(RESPONSE.NO_LOAN_PRODUCT_ERROR.code,
                                 RESPONSE.NO_LOAN_PRODUCT_ERROR.mesage);
             }
 
-            List<LoanProductResponse> responseList = new ArrayList<>();
+            Page<LoanProductResponse> responseList = loanProductList.map(LoanProduct::toResponse);
 
-            for (LoanProduct product : loanProductList) {
-                responseList.add(product.toResponse());
-            }
-
-            return new BaseResponse<List<LoanProductResponse>>().ofSuccess(responseList);
+            return new BaseResponse<Page<LoanProductResponse>>().ofSuccess(responseList);
         }catch (Exception e){
             log.error("LoanProductService :: findAll :: error :: {}",e.toString());
-            return new BaseResponse<List<LoanProductResponse>>()
+            return new BaseResponse<Page<LoanProductResponse>>()
                     .ofError(RESPONSE.ERROR.code,
                             RESPONSE.ERROR.mesage);
         }

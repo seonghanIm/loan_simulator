@@ -1,4 +1,4 @@
-package com.han.loan_simulator.common.base;
+package com.han.loan_simulator.common.baseDto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
