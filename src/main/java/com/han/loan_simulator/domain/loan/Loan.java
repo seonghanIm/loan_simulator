@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -41,6 +42,12 @@ public class Loan {
     @Enumerated(EnumType.STRING)
     private RepaymentMethod repaymentMethod;
 
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    @Enumerated(EnumType.STRING)
+    private LoanStatus loanStatus;
+
     private LocalDateTime createAt;
     private LocalDateTime updatedAt;
 
@@ -48,7 +55,12 @@ public class Loan {
     @PrePersist
     protected void onCreate(){
         this.createAt = LocalDateTime.now();
-        
+        this.loanStatus = LoanStatus.REQUESTED;
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

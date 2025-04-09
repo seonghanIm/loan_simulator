@@ -85,6 +85,7 @@ public class UserServiceTest {
         BaseResponse<UserResponse> response = userService.login(request);
 
         assertThat(response.isSuccess()).isTrue();
+        assertThat(response.getData().getNickName()).isEqualTo("test");
     }
 
     @Test
@@ -96,7 +97,7 @@ public class UserServiceTest {
         BaseResponse<UserResponse> response = userService.login(request);
 
         assertThat(response.isSuccess()).isFalse();
-        assertThat(response.getCode()).isEqualTo(RESPONSE.NO_EXIST_NICKNAME.code);
+        assertThat(response.getCode()).isEqualTo(RESPONSE.NO_EXIST_USER.code);
     }
 
 

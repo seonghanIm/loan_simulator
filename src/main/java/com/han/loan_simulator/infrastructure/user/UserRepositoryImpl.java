@@ -8,6 +8,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryImpl implements UserRepository {
@@ -26,4 +28,11 @@ public class UserRepositoryImpl implements UserRepository {
         Example<User> example = Example.of(user, matcher);
         return jpaRepository.exists(example);
     }
+
+    @Override
+    public Optional<User> findbyNickName(String nickName) {
+        return jpaRepository.findByNickName(nickName);
+    }
+
+
 }

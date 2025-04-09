@@ -101,4 +101,11 @@ public class LoanProductService {
     }
 
 
+    public Optional<LoanProduct> getLoanProduct(Long productId){
+        return loanProductRepository.findById(productId);
+    }
+
+
+
+
 }

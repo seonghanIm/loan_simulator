@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -57,7 +59,7 @@ public class UserService {
     public BaseResponse<UserResponse> login(UserRequest userRequest) {
         try {
             if (!userRepository.isExist(userRequest.toEntity())) {
-                return new BaseResponse<UserResponse>().ofError(RESPONSE.NO_EXIST_NICKNAME.code, RESPONSE.NO_EXIST_NICKNAME.mesage);
+                return new BaseResponse<UserResponse>().ofError(RESPONSE.NO_EXIST_USER.code, RESPONSE.NO_EXIST_USER.mesage);
             }
             UserResponse response = new UserResponse(userRequest.getNickName());
             return new BaseResponse<UserResponse>().ofSuccess(response);
@@ -65,6 +67,21 @@ public class UserService {
             log.error("UserService :: login :: error :: {}", e.toString());
             return new BaseResponse<UserResponse>().ofError();
         }
+    }
+
+
+    public boolean isExistUser(User user){
+        if(userRepository.isExist(user)) return true;
+        return false;
+    }
+
+    public boolean isExistUser(String nickName){
+        if(userRepository.findbyNickName(nickName).isPresent()) return true;
+        return false;
+    }
+
+    public Optional<User> getUserBy(String nickName){
+       return userRepository.findbyNickName(nickName);
     }
 
 }

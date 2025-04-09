@@ -9,7 +9,7 @@ public enum RESPONSE {
     NO_LOAN_PRODUCT_ERROR(504, "대출 상품이 존재하지 않습니다."),
     NICK_NAME_VALIDATE_ERROR(505,"닉네임은 20자 이하의 한글,영문,숫자만 가능합니다."),
     NICK_NAME_DUPLICATED_ERROR(506, "중복되는 닉네임 입니다."),
-    NO_EXIST_NICKNAME(507, "존재하지 않는 닉네임 입니다.");
+    NO_EXIST_USER(507, "존재하지 않는 유저 입니다.");
 
 
     public int code;
