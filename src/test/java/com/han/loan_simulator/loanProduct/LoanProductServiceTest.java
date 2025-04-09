@@ -65,7 +65,7 @@ public class LoanProductServiceTest {
                 .repaymentMethod(RepaymentMethod.EQUAL_PRINCIPAL)
                 .build();
 
-        BaseResponse response =  loanProductService.register(request);
+        BaseResponse<LoanProductResponse> response =  loanProductService.register(request);
 
         assertThat(response.isSuccess()).isFalse();
         assertThat(response.getCode()).isEqualTo(RESPONSE.INPUT_AMOUNT_ERROR.code);
@@ -84,7 +84,7 @@ public class LoanProductServiceTest {
                 .repaymentMethod(RepaymentMethod.EQUAL_PRINCIPAL)
                 .build();
 
-        BaseResponse response = loanProductService.register(request);
+        BaseResponse<LoanProductResponse> response = loanProductService.register(request);
         assertThat(response.isSuccess()).isFalse();
         assertThat(response.getCode()).isEqualTo(RESPONSE.INPUT_TERM_ERROR.code);
     }

@@ -19,6 +19,13 @@ public class BaseResponse<T> {
         return this;
     }
 
+    public BaseResponse<T> ofError(){
+        this.code = RESPONSE.ERROR.code;
+        this.message = RESPONSE.ERROR.mesage;
+        this.data = null;
+        return this;
+    }
+
     public BaseResponse<T> ofSuccess(){
         this.code = RESPONSE.SUCCESS.code;
         this.message = RESPONSE.SUCCESS.mesage;

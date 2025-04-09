@@ -56,7 +56,6 @@ public class LoanProductService {
     }
 
 
-    @Transactional
     public BaseResponse<LoanProductResponse> findById(Long id){
         try {
             Optional<LoanProduct> product = loanProductRepository.findById(id);
@@ -79,7 +78,6 @@ public class LoanProductService {
         }
     }
 
-    @Transactional
     public BaseResponse<Page<LoanProductResponse>> findAll(Pageable pageable){
         try {
             Page<LoanProduct> loanProductList = loanProductRepository.findAll(pageable);
