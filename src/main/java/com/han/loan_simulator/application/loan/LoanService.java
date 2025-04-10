@@ -25,21 +25,24 @@ public class LoanService {
     private final LoanMapper loanMapper;
 
     @Transactional
-    public BaseResponse<LoanResponse> register(LoanRequest loanRequest){
+    public BaseResponse<LoanResponse> register(LoanRequest loanRequest) {
 
-        if(!userService.isExistUser(loanRequest.getNickName())){
-            return new BaseResponse<LoanResponse>().ofError(RESPONSE.NO_EXIST_USER.code, RESPONSE.NO_EXIST_USER.mesage);
+        if (!userService.isExistUser(loanRequest.getNickName())) {
+            return new BaseResponse<LoanResponse>()
+                    .ofError(RESPONSE.NO_EXIST_USER.code,
+                            RESPONSE.NO_EXIST_USER.mesage);
         }
 
-        if(!loanProductService.getLoanProduct(loanRequest.getLoanProductId()).isPresent()){
-            return new BaseResponse<LoanResponse>().ofError(RESPONSE.NO_LOAN_PRODUCT_ERROR.code , RESPONSE.NO_LOAN_PRODUCT_ERROR.mesage);
+        if (!loanProductService.getLoanProduct(loanRequest.getLoanProductId()).isPresent()) {
+            return new BaseResponse<LoanResponse>()
+                    .ofError(RESPONSE.NO_LOAN_PRODUCT_ERROR.code,
+                            RESPONSE.NO_LOAN_PRODUCT_ERROR.mesage);
         }
 
         Loan loan = loanMapper.toEntity(loanRequest);
 
         loanRepository.save(loan);
-
-        return new BaseResponse<>().ofSuccess()
+        return new BaseResponse<LoanResponse>().ofSuccess(loan.toResponse());
 
 
     }

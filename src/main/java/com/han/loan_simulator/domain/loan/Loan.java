@@ -3,6 +3,7 @@ package com.han.loan_simulator.domain.loan;
 import com.han.loan_simulator.domain.loanProduct.LoanProduct;
 import com.han.loan_simulator.domain.loanProduct.RepaymentMethod;
 import com.han.loan_simulator.domain.user.User;
+import com.han.loan_simulator.web.loan.LoanResponse;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -61,6 +62,23 @@ public class Loan {
     @PreUpdate
     protected void onUpdate(){
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public LoanResponse toResponse(){
+        return LoanResponse.builder()
+                .id(id)
+                .nickName(user.getNickName())
+                .loanProductId(loanProduct.getId())
+                .principal(principal)
+                .interestRate(interestRate)
+                .termMonth(termMonths)
+                .repaymentMethod(repaymentMethod)
+                .startDate(startDate)
+                .endDate(endDate)
+                .loanStatus(loanStatus)
+                .createdAt(createAt)
+                .updatedAt(updatedAt)
+                .build();
     }
 
 }
